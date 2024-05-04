@@ -1,5 +1,5 @@
-const showMessage = (req, res) => {
-  res.status(200).send(`Here is your message: ${req.params.message}`);
+const register = async (req, res) => {
+  
 };
 
-module.exports = { showMessage };
+module.exports = { register };

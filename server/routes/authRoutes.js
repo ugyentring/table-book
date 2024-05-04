@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 //controllers
-const { showMessage } = require("../controllers/authController.js");
+const { register } = require("../controllers/authController.js");
 
-
-router.get("/:message", showMessage);
+router.post("/register", register)
 
 module.exports = router;
