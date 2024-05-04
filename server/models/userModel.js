@@ -23,7 +23,9 @@ const userSchema = new mongoose.Schema(
       min: 6,
       max: 64,
     },
-    stripe_account_id: "",
+    stripe_account_id: {
+      
+    },
     stripe_seller: {},
     stripeSession: {},
   },
@@ -48,4 +50,4 @@ userSchema.pre("save", function (next) {
 });
 
 const User = mongoose.model("User", userSchema);
-export default User;
+module.exports = User;
