@@ -1,8 +1,8 @@
 import { useState } from "react";
 import RegisterForm from "../components/RegisterForm";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { register } from "../actions/authAction";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -14,7 +14,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:8000/api/register`, {
+      const res = await register({
         name,
         email,
         password,
@@ -24,7 +24,11 @@ const Register = () => {
       navigate("/login");
     } catch (error) {
       console.log("Error in registration", error);
-      if (error.response.status === 400) toast.error(error.response.data);
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data);
+      } else {
+        toast.error("An unexpected error occurred");
+      }
     }
   };
 
