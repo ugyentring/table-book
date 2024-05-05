@@ -1,11 +1,14 @@
 import { useState } from "react";
 import RegisterForm from "../components/RegisterForm";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   //sends the user data to the backend with axios
   const handleSubmit = async (e) => {
@@ -17,8 +20,11 @@ const Register = () => {
         password,
       });
       console.log(res);
+      toast.success("Registration successful");
+      navigate("/login");
     } catch (error) {
       console.log("Error in registration", error);
+      if (error.response.status === 400) toast.error(error.response.data);
     }
   };
 
@@ -30,7 +36,6 @@ const Register = () => {
       >
         <h1>Register</h1>
       </div>
-
       <div className="container">
         <div className="row">
           <div className="col-md-6 offset-md-3 ">

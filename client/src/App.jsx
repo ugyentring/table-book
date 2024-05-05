@@ -1,5 +1,7 @@
 //Dependency Import
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Home from "./booking/Home";
 import Login from "./auth/Login";
@@ -10,7 +12,9 @@ const App = () => {
   return (
     <>
       <BrowserRouter>
-        {TopNav()}
+        <TopNav />
+        {/* notification */}
+        <ToastContainer position="top-center" />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
