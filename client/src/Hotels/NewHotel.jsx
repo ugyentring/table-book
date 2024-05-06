@@ -1,12 +1,12 @@
-const Home = () => {
+const New = () => {
   return (
     <div
       className="container-fluid h1
     p-5 text-center"
     >
-      home
+      <h1>new hotel add here</h1>
     </div>
   );
 };
 
-export default Home;
+export default New;
