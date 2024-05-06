@@ -9,6 +9,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      let res = await login({ email, password });
+      if (res.data) {
+        console.log("save user in redux");
+      }
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 400) toast.error(error.response.data);
+    }
   };
 
   return (

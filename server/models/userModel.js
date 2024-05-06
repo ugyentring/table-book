@@ -23,15 +23,14 @@ const userSchema = new mongoose.Schema(
       min: 6,
       max: 64,
     },
-    stripe_account_id: {
-      
-    },
+    stripe_account_id: {},
     stripe_seller: {},
     stripeSession: {},
   },
   { timestamps: true }
 );
 
+//hash password logic
 userSchema.pre("save", function (next) {
   let user = this;
 
@@ -48,6 +47,18 @@ userSchema.pre("save", function (next) {
     return next();
   }
 });
+
+//compare password when loggin in
+userSchema.methods.comparePassword = function (password, next) {
+  bcrypt.compare(password, this.password, function (err, match) {
+    if (err) {
+      console.log("Compare password", err);
+      return next(err, false);
+    }
+    console.log("match password", match);
+    return next(null, match);
+  });
+};
 
 const User = mongoose.model("User", userSchema);
 module.exports = User;
