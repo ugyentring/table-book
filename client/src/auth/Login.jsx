@@ -28,7 +28,7 @@ const Login = () => {
         type: "LOGGED_IN_USER",
         payload: res.data,
       });
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) toast.error(error.response.data);
