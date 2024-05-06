@@ -2,10 +2,15 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { login } from "../actions/authAction.js";
 import LoginForm from "../components/LoginForm";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +20,15 @@ const Login = () => {
       if (res.data) {
         console.log("save user in redux");
       }
-      console.log(res.data);
+      //save user and token to local storage
+      window.localStorage.setItem("auth", JSON.stringify(res.data));
+
+      //save user and token in redux
+      dispatch({
+        type: "LOGGED_IN_USER",
+        payload: res.data,
+      });
+      navigate("/");
     } catch (error) {
       console.log(error);
       if (error.response.status === 400) toast.error(error.response.data);
