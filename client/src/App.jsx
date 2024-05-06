@@ -8,6 +8,7 @@ import Register from "./auth/Register";
 import TopNav from "./components/TopNav";
 import Dashboard from "./user/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import DashboardSeller from "./user/DashboardSeller";
 
 const App = () => {
   return (
@@ -22,8 +23,18 @@ const App = () => {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
+
+          {/*Private Routes*/}
           <Route exact path="/" element={<PrivateRoute />}>
             <Route exact path="/dashboard" element={<Dashboard />} />
+          </Route>
+
+          <Route exact path="/" element={<PrivateRoute />}>
+            <Route
+              exact
+              path="/dashboard/seller"
+              element={<DashboardSeller />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>
