@@ -1,9 +1,7 @@
 import PropTypes from "prop-types";
 
-const RegisterForm = ({
+const LoginForm = ({
   handleSubmit,
-  name,
-  setName,
   email,
   setEmail,
   password,
@@ -11,17 +9,6 @@ const RegisterForm = ({
 }) => {
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group mb-3">
-        <label className="form-label">Name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-
       <div className="form-group mb-3 ">
         <label className="form-label">Email</label>
         <input
@@ -44,24 +31,19 @@ const RegisterForm = ({
         />
       </div>
 
-      <button
-        disabled={!name || !email || !password}
-        className="btn btn-primary "
-      >
+      <button disabled={!email || !password} className="btn btn-primary ">
         Submit
       </button>
     </form>
   );
 };
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  setName: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   setEmail: PropTypes.func.isRequired,
   password: PropTypes.string.isRequired,
   setPassword: PropTypes.func.isRequired,
 };
 
-export default RegisterForm;
+export default LoginForm;
